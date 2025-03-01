@@ -3,7 +3,7 @@ import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { Banknote, LayoutGrid, PiggyBank, Wallet } from 'lucide-react';
+import { Banknote, LayoutGrid, PiggyBank, Receipt, Wallet } from 'lucide-react';
 import AppLogo from './app-logo';
 
 const mainNavItems: NavItem[] = [
@@ -13,9 +13,14 @@ const mainNavItems: NavItem[] = [
         icon: LayoutGrid,
     },
     {
+        title: 'Wallet',
+        url: '/wallet',
+        icon: Wallet,
+    },
+    {
         title: 'Transaction',
         url: '/transaction',
-        icon: Wallet,
+        icon: Receipt,
     },
     {
         title: 'Budget',

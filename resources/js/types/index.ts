@@ -38,3 +38,9 @@ export interface User {
     updated_at: string;
     [key: string]: unknown; // This allows for additional properties...
 }
+
+export interface Wallet {
+    id: number;
+    name: string;
+    amount: number;
+}
