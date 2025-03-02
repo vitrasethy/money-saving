@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Settings;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Settings\ProfileUpdateRequest;
+use App\Models\Budget;
+use App\Models\Category;
+use App\Models\Wallet;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -16,13 +19,13 @@ class ProfileController extends Controller
     /**
      * Show the user's profile settings page.
      */
-    public function edit(Request $request): Response
-    {
-        return Inertia::render('settings/profile', [
-            'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
-            'status' => $request->session()->get('status'),
-        ]);
-    }
+    // public function edit(Request $request): Response
+    // {
+    //    return Inertia::render('settings/profile', [
+    //        'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
+    //        'status' => $request->session()->get('status'),
+    //    ]);
+    // }
 
     /**
      * Update the user's profile settings.
@@ -59,5 +62,20 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/');
+    }
+
+    public function me()
+    {
+        $user = Auth::user();
+        $wallets = Wallet::where('user_id', $user->id)->get();
+        $budgets = Budget::where('user_id', $user->id)->get();
+        $categories = Category::where('user_id', $user->id)->get();
+
+        return Inertia::render('settings/profile', [
+            'user' => Auth::user(),
+            'wallets' => $wallets,
+            'budgets' => $budgets,
+            'categories' => $categories,
+        ]);
     }
 }
